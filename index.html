@@ -21,6 +21,7 @@ body{
   line-height:1.8;min-height:100vh;-webkit-font-smoothing:antialiased;
   overflow-x:hidden;position:relative;
 }
+[hidden]{display:none!important}
 a,button,summary{-webkit-tap-highlight-color:transparent;outline:none}
 a:focus,button:focus,summary:focus{outline:none}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
@@ -39,11 +40,10 @@ body.custom-cursor #cursor,body.custom-cursor #cursorRing{display:block}
 #cursorRing{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--accent);transform:translate(-50%,-50%);transition:transform .15s,width .2s,height .2s,border-color .3s;opacity:.6}
 body.hovering #cursor{width:16px;height:16px}
 body.hovering #cursorRing{width:48px;height:48px}
-
 #follower{position:fixed;pointer-events:none;z-index:9997;width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));transform:translate(-50%,-50%);display:none;box-shadow:0 0 12px var(--accent)}
 body.follow-on #follower{display:block}
 
-/* 背景ブロブ */
+/* 背景 */
 .blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:.5;pointer-events:none;z-index:0}
 .blob-1{width:400px;height:400px;background:#ffe0ec;top:-100px;left:-100px;animation:float1 12s ease-in-out infinite}
 .blob-2{width:350px;height:350px;background:#e6e0ff;top:30%;right:-120px;animation:float2 15s ease-in-out infinite}
@@ -56,14 +56,16 @@ body.follow-on #follower{display:block}
 /* ナビ */
 nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,190,220,.15);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;animation:navDrop .8s cubic-bezier(.34,1.56,.64,1) both}
 @keyframes navDrop{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
-.nav-logo{font-size:.95rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.nav-logo{font-size:.95rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer}
 .nav-logo::before{content:'';width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 12px rgba(255,184,209,.6);animation:pulseDot 2.5s ease-in-out infinite}
 @keyframes pulseDot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
 .nav-links{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
-.nav-links a{text-decoration:none;color:var(--text-muted);font-size:.85rem;font-weight:500;transition:color .25s,transform .25s;position:relative;display:inline-block}
+.nav-links a{text-decoration:none;color:var(--text-muted);font-size:.85rem;font-weight:500;transition:color .25s,transform .25s;position:relative;display:inline-block;cursor:pointer}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:0;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s cubic-bezier(.34,1.56,.64,1)}
 .nav-links a:hover{color:var(--text);transform:translateY(-2px)}
 .nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{width:100%}
 .nav-icons{display:flex;gap:8px;align-items:center}
 .icon-btn{width:36px;height:36px;border-radius:50%;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s,transform .25s cubic-bezier(.34,1.56,.64,1)}
 .icon-btn:hover{background:rgba(255,184,209,.15);transform:scale(1.1)}
@@ -112,6 +114,7 @@ section{max-width:820px;margin:0 auto 80px;padding:0 24px;position:relative;z-in
 .profile-item:nth-child(6){animation-delay:.3s}
 .profile-item:nth-child(7){animation-delay:.35s}
 .profile-item:nth-child(8){animation-delay:.4s}
+.profile-item:nth-child(9){animation-delay:.45s}
 @keyframes popIn{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .profile-item::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));background-size:200% 200%;opacity:.7;animation:gradientShift 5s ease infinite}
 .profile-item:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--shadow-hover)}
@@ -169,7 +172,7 @@ details[open] .faq-q .arrow{transform:rotate(180deg);color:var(--accent);animati
 .sns-link.yt svg{fill:#ff5a5a}
 .sns-link.marshmallow svg{fill:#ff9a3c}
 
-/* その他ページ用 折りたたみ */
+/* その他 */
 .other-list{display:flex;flex-direction:column;gap:10px}
 .other-item{background:#fff;border-radius:16px;box-shadow:var(--shadow);overflow:hidden;transition:box-shadow .3s,transform .3s}
 .other-item:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
@@ -182,12 +185,12 @@ details[open] .faq-q .arrow{transform:rotate(180deg);color:var(--accent);animati
 .other-content ul{list-style:none;padding-left:0}
 .other-content li{padding:6px 0;border-bottom:1px dashed rgba(200,195,215,.25)}
 .other-content li:last-child{border-bottom:none}
-.other-content a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}
+.other-content a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s;cursor:pointer}
 .other-content a:hover{border-bottom-color:var(--accent)}
 
 /* サイトマップ */
 .sitemap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.sitemap-link{display:block;padding:14px 18px;background:#fff;border-radius:14px;text-decoration:none;color:var(--text);font-weight:500;font-size:.85rem;box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.sitemap-link{display:block;padding:14px 18px;background:#fff;border-radius:14px;text-decoration:none;color:var(--text);font-weight:500;font-size:.85rem;box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;cursor:pointer}
 .sitemap-link:hover{transform:translateY(-4px) scale(1.03);box-shadow:var(--shadow-hover)}
 .sitemap-link::before{content:'→ ';color:var(--accent);font-weight:700}
 
@@ -214,7 +217,7 @@ details[open] .faq-q .arrow{transform:rotate(180deg);color:var(--accent);animati
 .color-dot:hover{transform:scale(1.15)}
 .color-dot.on{box-shadow:0 0 0 2px var(--text)}
 
-/* 検索オーバーレイ */
+/* 検索 */
 #searchOverlay{position:fixed;inset:0;background:rgba(20,18,28,.6);backdrop-filter:blur(8px);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:100px 24px}
 #searchOverlay.open{display:flex;animation:fadeIn .3s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -222,14 +225,12 @@ details[open] .faq-q .arrow{transform:rotate(180deg);color:var(--accent);animati
 .search-box input{width:100%;padding:14px 20px;border:none;border-radius:50px;background:rgba(200,195,215,.15);font-family:inherit;font-size:.95rem;color:var(--text);outline:none}
 .search-box input::placeholder{color:var(--text-muted)}
 .search-results{margin-top:16px;max-height:400px;overflow-y:auto}
-.search-result{padding:12px 16px;border-radius:12px;text-decoration:none;color:var(--text);display:block;font-size:.9rem;transition:background .2s}
+.search-result{padding:12px 16px;border-radius:12px;text-decoration:none;color:var(--text);display:block;font-size:.9rem;transition:background .2s;cursor:pointer}
 .search-result:hover{background:rgba(255,184,209,.12)}
 
 /* フッター */
 footer{text-align:center;padding:48px 24px 60px;color:var(--text-muted);font-size:.8rem;position:relative;z-index:1}
 footer .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));margin:0 8px;vertical-align:middle;animation:pulseDot 2.5s ease-in-out infinite}
-footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}
-footer a:hover{border-bottom-color:var(--accent)}
 
 /* スクロールトップ */
 .to-top{position:fixed;bottom:28px;right:28px;width:48px;height:48px;border-radius:50%;background:#fff;border:none;box-shadow:var(--shadow-hover);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s,transform .35s cubic-bezier(.34,1.56,.64,1);z-index:90}
@@ -237,13 +238,11 @@ footer a:hover{border-bottom-color:var(--accent)}
 .to-top:hover{transform:translateY(-6px) scale(1.1);animation-play-state:paused}
 .to-top svg{width:18px;height:18px;fill:none;stroke:var(--text);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 
-/* 404 専用ページ */
-#page404{display:none;min-height:80vh;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative;z-index:1}
-#page404.show{display:flex;animation:heroFadeUp .8s cubic-bezier(.22,1,.36,1) both}
+/* 404 */
+#page404{display:flex;min-height:80vh;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative;z-index:1}
 #page404 .code{font-size:clamp(4rem,14vw,7rem);font-weight:700;line-height:1;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3),var(--accent));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientShift 4s ease infinite;margin-bottom:16px}
 #page404 h2{font-size:1.3rem;color:var(--text);margin-bottom:12px}
 #page404 p{color:var(--text-muted);font-size:.9rem;margin-bottom:28px}
-body.notfound-mode .main-content{display:none}
 
 /* 更新履歴 */
 .history-list{list-style:none}
@@ -251,7 +250,12 @@ body.notfound-mode .main-content{display:none}
 .history-list li:last-child{border-bottom:none}
 .history-date{color:var(--accent);font-weight:700;white-space:nowrap;font-size:.78rem;padding-top:2px}
 
-/* パーティクル・演出レイヤー */
+/* ページヘッダー（個別ページ用） */
+.page-back{display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;padding:10px 20px;background:#fff;border-radius:50px;text-decoration:none;color:var(--text-muted);font-size:.82rem;font-weight:500;box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;cursor:pointer}
+.page-back:hover{transform:translateX(-4px);box-shadow:var(--shadow-hover);color:var(--text)}
+.page-back::before{content:'←'}
+
+/* パーティクル */
 #fxLayer{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
 .fx-el{position:absolute;pointer-events:none;will-change:transform,opacity}
 .fx-petal{width:14px;height:14px;border-radius:50% 0 50% 50%;background:linear-gradient(135deg,#ffd1e0,#ffb8d1);animation:petalFall linear forwards}
@@ -264,10 +268,8 @@ body.notfound-mode .main-content{display:none}
 @keyframes starRise{0%{transform:translateY(105vh) scale(.5) rotate(0);opacity:0}10%{opacity:1}100%{transform:translateY(-40px) scale(1) rotate(360deg);opacity:0}}
 @keyframes bubbleRise{0%{transform:translateY(105vh) scale(.4);opacity:0}10%{opacity:.8}100%{transform:translateY(-40px) scale(1.2);opacity:0}}
 @keyframes confettiFall{0%{transform:translateY(-40px) rotate(0);opacity:0}10%{opacity:1}100%{transform:translateY(105vh) translateX(60px) rotate(720deg);opacity:0}}
-
 .click-spark{position:fixed;pointer-events:none;width:8px;height:8px;border-radius:50%;z-index:9996;animation:sparkFly .6s ease-out forwards}
 @keyframes sparkFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
-
 .firework-spark{position:fixed;pointer-events:none;width:6px;height:6px;border-radius:50%;z-index:9995;animation:fwFly 1s ease-out forwards}
 @keyframes fwFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
 </style>
@@ -275,219 +277,226 @@ body.notfound-mode .main-content{display:none}
 <body>
 
 <div id="loader"><div class="ring"></div></div>
-
-<div id="cursor"></div>
-<div id="cursorRing"></div>
-<div id="follower"></div>
-
-<div class="blob blob-1"></div>
-<div class="blob blob-2"></div>
-<div class="blob blob-3"></div>
-<div class="blob blob-4"></div>
-
+<div id="cursor"></div><div id="cursorRing"></div><div id="follower"></div>
+<div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div><div class="blob blob-4"></div>
 <div id="fxLayer"></div>
 
-<div class="main-content">
+<!-- ナビ -->
+<nav>
+  <a href="./" data-link="home" class="nav-logo">とろろぉーーーー</a>
+  <div class="nav-links">
+    <a href="?q=profile" data-link="profile">プロフィール</a>
+    <a href="?q=faq" data-link="faq">質問</a>
+    <a href="?q=video" data-link="video">動画</a>
+    <a href="?q=links" data-link="links">リンク</a>
+    <a href="?q=other" data-link="other">その他</a>
+    <a href="?q=sitemap" data-link="sitemap">サイトマップ</a>
+  </div>
+  <div class="nav-icons">
+    <button class="icon-btn" id="searchBtn" aria-label="検索">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/></svg>
+    </button>
+    <button class="icon-btn" id="settingsBtn" aria-label="設定">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </div>
+</nav>
 
-  <nav>
-    <div class="nav-logo">とろろぉーーーー</div>
-    <div class="nav-links">
-      <a href="#profile">プロフィール</a>
-      <a href="#faq">質問</a>
-      <a href="#video">動画</a>
-      <a href="#links">リンク</a>
-      <a href="#other">その他</a>
-      <a href="#sitemap">サイトマップ</a>
-    </div>
-    <div class="nav-icons">
-      <button class="icon-btn" id="searchBtn" aria-label="検索">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/></svg>
-      </button>
-      <button class="icon-btn" id="settingsBtn" aria-label="設定">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      </button>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <h1>とろろぉ<span class="accent">ーーーー</span></h1>
-    <p class="subtitle">のんびり活動中</p>
-    <div class="hero-buttons">
-      <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" class="btn" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-        チャンネルを見る
-      </a>
-      <a href="#profile" class="btn btn-outline">プロフィール</a>
-    </div>
-  </header>
-
-  <section id="profile" class="fade-in">
-    <h2 class="section-title">プロフィール</h2>
-    <div class="profile-grid">
-      <div class="profile-item"><div class="label">NAME</div><div class="value">とろろぉーーーー（仮名）</div></div>
-      <div class="profile-item"><div class="label">BIRTHDAY</div><div class="value">3月10日</div></div>
-      <div class="profile-item"><div class="label">AGE</div><div class="value">ひぃこぉうぅかぁいぃ</div></div>
-      <div class="profile-item"><div class="label">推し</div><div class="value">莉犬くん・ちぐさくん</div></div>
-      <div class="profile-item"><div class="label">好きなもの</div><div class="value">ねぎとろ</div></div>
-      <div class="profile-item"><div class="label">苦手なもの</div><div class="value">虫全般</div></div>
-      <div class="profile-item"><div class="label">MBTI</div><div class="value">ISFP-A</div></div>
-      <div class="profile-item"><div class="label">ファンネーム</div><div class="value">とろろ</div></div>
-      <div class="profile-item wide"><div class="label">目標</div><div class="value">登録者100人</div></div>
-    </div>
-  </section>
-
-  <section id="faq" class="fade-in">
-    <h2 class="section-title">よくある質問</h2>
-    <div class="faq-list">
-      <details class="faq-item"><summary class="faq-q">チャンネル名の由来は？ <span class="arrow">▼</span></summary><div class="faq-a">とろろが好きだから…とろろぉーーーー！</div></details>
-      <details class="faq-item"><summary class="faq-q">活動ジャンルは？ <span class="arrow">▼</span></summary><div class="faq-a">まだ模索中！歌ったりお話ししたり、まったり活動しています。</div></details>
-      <details class="faq-item"><summary class="faq-q">好きな食べ物は？ <span class="arrow">▼</span></summary><div class="faq-a">ねぎとろ！あとは甘いもの全般。</div></details>
-      <details class="faq-item"><summary class="faq-q">趣味は？ <span class="arrow">▼</span></summary><div class="faq-a">推し活・動画鑑賞・かわいいグッズ集め</div></details>
-      <details class="faq-item"><summary class="faq-q">ひとことどうぞ！ <span class="arrow">▼</span></summary><div class="faq-a">のんびり更新中ですが、仲良くしてください〜！</div></details>
-    </div>
-  </section>
-
-  <section id="video" class="fade-in">
-    <h2 class="section-title">動画</h2>
-    <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" class="video-card" target="_blank" rel="noopener">
-      <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      <h3>YouTube で見る</h3>
-      <p>最新の動画はチャンネルからチェック！</p>
+<!-- ホーム（ヒーロー） -->
+<header class="hero" data-page="home">
+  <h1>とろろぉ<span class="accent">ーーーー</span></h1>
+  <p class="subtitle">のんびり活動中</p>
+  <div class="hero-buttons">
+    <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" class="btn" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+      チャンネルを見る
     </a>
-  </section>
+    <a href="?q=profile" data-link="profile" class="btn btn-outline">プロフィール</a>
+  </div>
+</header>
 
-  <section id="links" class="fade-in">
-    <h2 class="section-title">リンク</h2>
-    <div class="sns-links">
-      <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" class="sns-link yt" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M23.5 6.2c-.3-1.1-1.1-1.9-2.2-2.2C19.4 3.5 12 3.5 12 3.5s-7.4 0-9.3.5c-1.1.3-1.9 1.1-2.2 2.2C0 8.1 0 12 0 12s0 3.9.5 5.8c.3 1.1 1.1 1.9 2.2 2.2 1.9.5 9.3.5 9.3.5s7.4 0 9.3-.5c1.1-.3 1.9-1.1 2.2-2.2.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.5v-7l6 3.5-6 3.5z"/></svg>
-        YouTube
-      </a>
-      <a href="https://marshmallow-qa.com/893993fq5zrki46" class="sns-link marshmallow" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.4 1.2 4.5 3 5.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3c1.8-1.2 3-3.3 3-5.7a7 7 0 0 0-7-7zM9.5 20h5a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1z"/></svg>
-        マシュマロ
-      </a>
-    </div>
-  </section>
+<!-- プロフィール -->
+<section id="profile" data-page="profile" class="fade-in">
+  <a href="./" data-link="home" class="page-back">ホームに戻る</a>
+  <h2 class="section-title">プロフィール</h2>
+  <div class="profile-grid">
+    <div class="profile-item"><div class="label">NAME</div><div class="value">とろろぉーーーー（仮名）</div></div>
+    <div class="profile-item"><div class="label">BIRTHDAY</div><div class="value">3月10日</div></div>
+    <div class="profile-item"><div class="label">AGE</div><div class="value">ひぃこぉうぅかぁいぃ</div></div>
+    <div class="profile-item"><div class="label">推し</div><div class="value">莉犬くん・ちぐさくん</div></div>
+    <div class="profile-item"><div class="label">好きなもの</div><div class="value">ねぎとろ</div></div>
+    <div class="profile-item"><div class="label">苦手なもの</div><div class="value">虫全般</div></div>
+    <div class="profile-item"><div class="label">MBTI</div><div class="value">ISFP-A</div></div>
+    <div class="profile-item"><div class="label">ファンネーム</div><div class="value">とろろ</div></div>
+    <div class="profile-item wide"><div class="label">目標</div><div class="value">登録者100人</div></div>
+  </div>
+</section>
 
-  <section id="other" class="fade-in">
-    <h2 class="section-title">その他</h2>
-    <div class="other-list">
+<!-- FAQ -->
+<section id="faq" data-page="faq" class="fade-in">
+  <a href="./" data-link="home" class="page-back">ホームに戻る</a>
+  <h2 class="section-title">よくある質問</h2>
+  <div class="faq-list">
+    <details class="faq-item"><summary class="faq-q">チャンネル名の由来は？ <span class="arrow">▼</span></summary><div class="faq-a">とろろが好きだから…とろろぉーーーー！</div></details>
+    <details class="faq-item"><summary class="faq-q">活動ジャンルは？ <span class="arrow">▼</span></summary><div class="faq-a">まだ模索中！歌ったりお話ししたり、まったり活動しています。</div></details>
+    <details class="faq-item"><summary class="faq-q">好きな食べ物は？ <span class="arrow">▼</span></summary><div class="faq-a">ねぎとろ！あとは甘いもの全般。</div></details>
+    <details class="faq-item"><summary class="faq-q">趣味は？ <span class="arrow">▼</span></summary><div class="faq-a">推し活・動画鑑賞・かわいいグッズ集め</div></details>
+    <details class="faq-item"><summary class="faq-q">ひとことどうぞ！ <span class="arrow">▼</span></summary><div class="faq-a">のんびり更新中ですが、仲良くしてください〜！</div></details>
+  </div>
+</section>
 
-      <details class="other-item">
-        <summary>利用規約 <span class="arrow">▼</span></summary>
-        <div class="other-content">
-          <ul>
-            <li>本サイトは「とろろぉーーーー」の公式サイトです。</li>
-            <li>掲載内容の無断転載・二次配布はご遠慮ください。</li>
-            <li>誹謗中傷・迷惑行為は禁止です。</li>
-            <li>内容は予告なく変更される場合があります。</li>
-          </ul>
-        </div>
-      </details>
+<!-- 動画 -->
+<section id="video" data-page="video" class="fade-in">
+  <a href="./" data-link="home" class="page-back">ホームに戻る</a>
+  <h2 class="section-title">動画</h2>
+  <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" class="video-card" target="_blank" rel="noopener">
+    <div class="play-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <h3>YouTube で見る</h3>
+    <p>最新の動画はチャンネルからチェック！</p>
+  </a>
+</section>
 
-      <details class="other-item">
-        <summary>プライバシーポリシー <span class="arrow">▼</span></summary>
-        <div class="other-content">
-          <ul>
-            <li>本サイトは個人情報を収集しません。</li>
-            <li>Cookieはアクセス解析のため使用する場合があります。</li>
-            <li>外部リンク先での情報管理は各サイトのポリシーに準じます。</li>
-          </ul>
-        </div>
-      </details>
+<!-- リンク -->
+<section id="links" data-page="links" class="fade-in">
+  <a href="./" data-link="home" class="page-back">ホームに戻る</a>
+  <h2 class="section-title">リンク</h2>
+  <div class="sns-links">
+    <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" class="sns-link yt" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M23.5 6.2c-.3-1.1-1.1-1.9-2.2-2.2C19.4 3.5 12 3.5 12 3.5s-7.4 0-9.3.5c-1.1.3-1.9 1.1-2.2 2.2C0 8.1 0 12 0 12s0 3.9.5 5.8c.3 1.1 1.1 1.9 2.2 2.2 1.9.5 9.3.5 9.3.5s7.4 0 9.3-.5c1.1-.3 1.9-1.1 2.2-2.2.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.5v-7l6 3.5-6 3.5z"/></svg>
+      YouTube
+    </a>
+    <a href="https://marshmallow-qa.com/893993fq5zrki46" class="sns-link marshmallow" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.4 1.2 4.5 3 5.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3c1.8-1.2 3-3.3 3-5.7a7 7 0 0 0-7-7zM9.5 20h5a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1z"/></svg>
+      マシュマロ
+    </a>
+  </div>
+</section>
 
-      <details class="other-item">
-        <summary>クレジット <span class="arrow">▼</span></summary>
-        <div class="other-content">
-          <ul>
-            <li>デザイン・コーディング：とろろぉーーーー</li>
-            <li>フォント：Zen Maru Gothic（Google Fonts）</li>
-            <li>アイコン：オリジナルSVG</li>
-          </ul>
-        </div>
-      </details>
+<!-- その他 -->
+<section id="other" data-page="other" class="fade-in">
+  <a href="./" data-link="home" class="page-back">ホームに戻る</a>
+  <h2 class="section-title">その他</h2>
+  <div class="other-list">
 
-      <details class="other-item">
-        <summary>更新履歴 <span class="arrow">▼</span></summary>
-        <div class="other-content">
-          <ul class="history-list">
-            <li><span class="history-date">2026.10.11</span><span>サイト内検索・設定パネル・演出機能などを追加</span></li>
-            <li><span class="history-date">2026.10.10</span><span>ホームページをリニューアル</span></li>
-            <li><span class="history-date">2026.03.10</span><span>ホームページを開設</span></li>
-          </ul>
-        </div>
-      </details>
+    <details class="other-item">
+      <summary>利用規約 <span class="arrow">▼</span></summary>
+      <div class="other-content">
+        <ul>
+          <li>本サイトは「とろろぉーーーー」の公式サイトです。</li>
+          <li>掲載内容の無断転載・二次配布はご遠慮ください。</li>
+          <li>誹謗中傷・迷惑行為は禁止です。</li>
+          <li>内容は予告なく変更される場合があります。</li>
+        </ul>
+      </div>
+    </details>
 
-      <details class="other-item">
-        <summary>リンク集 <span class="arrow">▼</span></summary>
-        <div class="other-content">
-          <ul>
-            <li><a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">YouTube チャンネル</a></li>
-            <li><a href="https://marshmallow-qa.com/893993fq5zrki46" target="_blank" rel="noopener">マシュマロ</a></li>
-          </ul>
-        </div>
-      </details>
+    <details class="other-item">
+      <summary>プライバシーポリシー <span class="arrow">▼</span></summary>
+      <div class="other-content">
+        <ul>
+          <li>本サイトは個人情報を収集しません。</li>
+          <li>Cookieはアクセス解析のため使用する場合があります。</li>
+          <li>外部リンク先での情報管理は各サイトのポリシーに準じます。</li>
+        </ul>
+      </div>
+    </details>
 
-      <details class="other-item">
-        <summary>グッズ紹介 <span class="arrow">▼</span></summary>
-        <div class="other-content"><p>現在準備中です。公開をお楽しみに！</p></div>
-      </details>
+    <details class="other-item">
+      <summary>クレジット <span class="arrow">▼</span></summary>
+      <div class="other-content">
+        <ul>
+          <li>デザイン・コーディング：とろろぉーーーー</li>
+          <li>フォント：Zen Maru Gothic（Google Fonts）</li>
+          <li>アイコン：オリジナルSVG</li>
+        </ul>
+      </div>
+    </details>
 
-      <details class="other-item">
-        <summary>コラボ情報 <span class="arrow">▼</span></summary>
-        <div class="other-content"><p>コラボのお誘いはマシュマロよりお待ちしています。</p></div>
-      </details>
+    <details class="other-item">
+      <summary>更新履歴 <span class="arrow">▼</span></summary>
+      <div class="other-content">
+        <ul class="history-list">
+          <li><span class="history-date">2026.10.12</span><span>URLルーティング（?q=）に対応</span></li>
+          <li><span class="history-date">2026.10.11</span><span>サイト内検索・設定パネル・演出機能などを追加</span></li>
+          <li><span class="history-date">2026.10.10</span><span>ホームページをリニューアル</span></li>
+          <li><span class="history-date">2026.03.10</span><span>ホームページを開設</span></li>
+        </ul>
+      </div>
+    </details>
 
-      <details class="other-item">
-        <summary>メディア出演情報 <span class="arrow">▼</span></summary>
-        <div class="other-content"><p>現在掲載できる情報はありません。</p></div>
-      </details>
+    <details class="other-item">
+      <summary>リンク集 <span class="arrow">▼</span></summary>
+      <div class="other-content">
+        <ul>
+          <li><a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">YouTube チャンネル</a></li>
+          <li><a href="https://marshmallow-qa.com/893993fq5zrki46" target="_blank" rel="noopener">マシュマロ</a></li>
+        </ul>
+      </div>
+    </details>
 
-    </div>
-  </section>
+    <details class="other-item">
+      <summary>グッズ紹介 <span class="arrow">▼</span></summary>
+      <div class="other-content"><p>現在準備中です。公開をお楽しみに！</p></div>
+    </details>
 
-  <section id="sitemap" class="fade-in">
-    <h2 class="section-title">サイトマップ</h2>
-    <div class="sitemap-grid">
-      <a href="#profile" class="sitemap-link">プロフィール</a>
-      <a href="#faq" class="sitemap-link">よくある質問</a>
-      <a href="#video" class="sitemap-link">動画</a>
-      <a href="#links" class="sitemap-link">リンク</a>
-      <a href="#other" class="sitemap-link">その他</a>
-      <a href="#share" class="sitemap-link">シェア</a>
-    </div>
-  </section>
+    <details class="other-item">
+      <summary>コラボ情報 <span class="arrow">▼</span></summary>
+      <div class="other-content"><p>コラボのお誘いはマシュマロよりお待ちしています。</p></div>
+    </details>
 
-  <section id="share" class="fade-in">
-    <h2 class="section-title">シェア</h2>
-    <div class="share-btns">
-      <button class="share-btn" data-share="x">
-        <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.5 8.6L23.3 22h-6.9l-5.4-7-6.2 7H1.6l8-9.2L.7 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.4 3.9H5.4L17.7 20z"/></svg>
-        X
-      </button>
-      <button class="share-btn" data-share="line">
-        <svg viewBox="0 0 24 24"><path d="M24 10.3c0-5.6-5.4-10.2-12-10.2S0 4.7 0 10.3c0 5 4.2 9.2 9.9 10 .4.1.9.2 1 .5.1.3.1.7 0 1l-.2 1c-.1.3-.3 1 .9.5 1.2-.4 6.3-3.7 8.6-6.4 1.6-1.7 2.8-3.6 2.8-6.6z"/></svg>
-        LINE
-      </button>
-      <button class="share-btn" data-share="url">
-        <svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7c-2.8 0-5 2.2-5 5s2.2 5 5 5h4v-1.9H7c-1.7 0-3.1-1.4-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>
-        URL
-      </button>
-    </div>
-  </section>
+    <details class="other-item">
+      <summary>メディア出演情報 <span class="arrow">▼</span></summary>
+      <div class="other-content"><p>現在掲載できる情報はありません。</p></div>
+    </details>
 
-  <footer>
-    <p>© 2026 とろろぉーーーー<span class="dot"></span></p>
-  </footer>
+  </div>
+</section>
 
-</div>
+<!-- サイトマップ -->
+<section id="sitemap" data-page="sitemap" class="fade-in">
+  <a href="./" data-link="home" class="page-back">ホームに戻る</a>
+  <h2 class="section-title">サイトマップ</h2>
+  <div class="sitemap-grid">
+    <a href="?q=profile" data-link="profile" class="sitemap-link">プロフィール</a>
+    <a href="?q=faq" data-link="faq" class="sitemap-link">よくある質問</a>
+    <a href="?q=video" data-link="video" class="sitemap-link">動画</a>
+    <a href="?q=links" data-link="links" class="sitemap-link">リンク</a>
+    <a href="?q=other" data-link="other" class="sitemap-link">その他</a>
+    <a href="?q=share" data-link="share" class="sitemap-link">シェア</a>
+  </div>
+</section>
 
-<div id="page404">
+<!-- シェア -->
+<section id="share" data-page="share" class="fade-in">
+  <a href="./" data-link="home" class="page-back">ホームに戻る</a>
+  <h2 class="section-title">シェア</h2>
+  <div class="share-btns">
+    <button class="share-btn" data-share="x">
+      <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.5 8.6L23.3 22h-6.9l-5.4-7-6.2 7H1.6l8-9.2L.7 2h7l4.9 6.5L18.9 2zm-1.2 18h1.9L7.4 3.9H5.4L17.7 20z"/></svg>
+      X
+    </button>
+    <button class="share-btn" data-share="line">
+      <svg viewBox="0 0 24 24"><path d="M24 10.3c0-5.6-5.4-10.2-12-10.2S0 4.7 0 10.3c0 5 4.2 9.2 9.9 10 .4.1.9.2 1 .5.1.3.1.7 0 1l-.2 1c-.1.3-.3 1 .9.5 1.2-.4 6.3-3.7 8.6-6.4 1.6-1.7 2.8-3.6 2.8-6.6z"/></svg>
+      LINE
+    </button>
+    <button class="share-btn" data-share="url">
+      <svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.7 1.4-3.1 3.1-3.1h4V7H7c-2.8 0-5 2.2-5 5s2.2 5 5 5h4v-1.9H7c-1.7 0-3.1-1.4-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.7 0 3.1 1.4 3.1 3.1s-1.4 3.1-3.1 3.1h-4V17h4c2.8 0 5-2.2 5-5s-2.2-5-5-5z"/></svg>
+      URL
+    </button>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer data-page="home">
+  <p>© 2026 とろろぉーーーー<span class="dot"></span></p>
+</footer>
+
+<!-- 404 -->
+<div id="page404" data-page="404">
   <div class="code">404</div>
   <h2>ページが見つかりませんでした</h2>
   <p>URLが間違っているか、ページが削除された可能性があります。</p>
-  <a href="#" class="btn" onclick="goHome(event)">ホームに戻る</a>
+  <a href="./" data-link="home" class="btn">ホームに戻る</a>
 </div>
 
 <button class="to-top" id="toTop" aria-label="トップに戻る">
@@ -499,7 +508,6 @@ body.notfound-mode .main-content{display:none}
     <h3>設定</h3>
     <button class="panel-close" id="panelClose">✕</button>
   </div>
-
   <div class="panel-group">
     <h4>配色テーマ</h4>
     <div class="color-dots" id="colorDots">
@@ -510,7 +518,6 @@ body.notfound-mode .main-content{display:none}
       <div class="color-dot" data-accent="#c4b5fd" data-accent2="#a5d8ff" data-accent3="#ffb8d1" style="background:linear-gradient(135deg,#c4b5fd,#a5d8ff)"></div>
     </div>
   </div>
-
   <div class="panel-group">
     <h4>背景エフェクト</h4>
     <div class="opt-row" id="fxBtns">
@@ -522,7 +529,6 @@ body.notfound-mode .main-content{display:none}
       <button class="opt-btn" data-fx="confetti">紙吹雪</button>
     </div>
   </div>
-
   <div class="panel-group">
     <h4>インタラクション</h4>
     <div class="opt-row">
@@ -542,46 +548,91 @@ body.notfound-mode .main-content{display:none}
 </div>
 
 <script>
+/* ===== ローディング ===== */
 window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('hide'), 400);
 });
 
-const VALID_HASHES = ['', '#', '#profile', '#faq', '#video', '#links', '#other', '#sitemap', '#share', '#top'];
-function checkRoute(){
-  const hash = location.hash;
-  const body = document.body;
-  const p404 = document.getElementById('page404');
-  if (hash && !VALID_HASHES.includes(hash)) {
-    body.classList.add('notfound-mode');
-    p404.classList.add('show');
-    window.scrollTo({top:0,behavior:'auto'});
-  } else {
-    body.classList.remove('notfound-mode');
-    p404.classList.remove('show');
+/* ===== ルーター（?q= パラメータ） ===== */
+(function(){
+  const PAGES = ['home', 'profile', 'faq', 'video', 'links', 'other', 'sitemap', 'share'];
+
+  function getPageFromURL(){
+    const params = new URLSearchParams(location.search);
+    const q = params.get('q');
+    if (!q) return 'home';
+    return PAGES.includes(q) ? q : '404';
   }
-}
-window.addEventListener('hashchange', checkRoute);
-checkRoute();
 
-function goHome(e){
-  e.preventDefault();
-  location.hash = '';
-  document.body.classList.remove('notfound-mode');
-  document.getElementById('page404').classList.remove('show');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+  function render(page){
+    document.querySelectorAll('[data-page]').forEach(el => {
+      const elPage = el.dataset.page;
+      let show;
+      if (page === 'home') {
+        show = (elPage !== '404');
+      } else {
+        show = (elPage === page);
+      }
+      el.hidden = !show;
+    });
 
+    // ナビの active 更新
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('active', a.dataset.link === page);
+    });
+
+    // 表示された fade-in を visible に
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.fade-in:not([hidden])').forEach(el => {
+        el.classList.remove('visible');
+        void el.offsetHeight; // reflow
+        el.classList.add('visible');
+      });
+    });
+  }
+
+  function navigate(page, push){
+    if (push === undefined) push = true;
+    if (push) {
+      const url = (page === 'home') ? location.pathname : `?q=${page}`;
+      history.pushState({page}, '', url);
+    }
+    render(page);
+    window.scrollTo({top: 0, behavior: 'auto'});
+  }
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-link]');
+    if (!link) return;
+    e.preventDefault();
+    navigate(link.dataset.link);
+  });
+
+  window.addEventListener('popstate', () => {
+    render(getPageFromURL());
+  });
+
+  // 初回レンダリング
+  render(getPageFromURL());
+
+  // 外部から使えるように
+  window.__route = {navigate, render, getPageFromURL};
+})();
+
+/* ===== スクロール表示 ===== */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.15 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+/* ===== スクロールトップ ===== */
 const toTop = document.getElementById('toTop');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 400) toTop.classList.add('show'); else toTop.classList.remove('show');
 });
 toTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
 
+/* ===== FAQ 1つだけ開く ===== */
 const faqs = document.querySelectorAll('.faq-item');
 faqs.forEach(faq => {
   faq.addEventListener('toggle', () => {
@@ -589,6 +640,7 @@ faqs.forEach(faq => {
   });
 });
 
+/* ===== パララックス ===== */
 const blobs = document.querySelectorAll('.blob');
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
@@ -598,6 +650,7 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
+/* ===== カスタムカーソル ===== */
 const cursor = document.getElementById('cursor');
 const cursorRing = document.getElementById('cursorRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -622,6 +675,7 @@ document.addEventListener('mousemove', (e) => {
   follower.style.top = e.clientY + 'px';
 });
 
+/* ===== 背景エフェクト ===== */
 const fxLayer = document.getElementById('fxLayer');
 let fxTimer = null;
 function spawnFx(type){
@@ -648,6 +702,7 @@ function setFx(type){
   fxTimer = setInterval(() => spawnFx(t), 700);
 }
 
+/* ===== クリックパーティクル ===== */
 let clickFxOn = false;
 document.addEventListener('click', (e) => {
   if (!clickFxOn) return;
@@ -667,6 +722,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
+/* ===== 花火 ===== */
 let fwTimer = null;
 function launchFirework(){
   const cx = Math.random() * window.innerWidth * 0.8 + window.innerWidth * 0.1;
@@ -691,6 +747,7 @@ function toggleFirework(on){
   if (on) { launchFirework(); fwTimer = setInterval(launchFirework, 1800); }
 }
 
+/* ===== 設定パネル ===== */
 const panel = document.getElementById('settingsPanel');
 document.getElementById('settingsBtn').addEventListener('click', () => panel.classList.add('open'));
 document.getElementById('panelClose').addEventListener('click', () => panel.classList.remove('open'));
@@ -744,6 +801,7 @@ document.getElementById('fireworkBtn').addEventListener('click', () => {
   toggleBtn('fireworkBtn', fwOn);
 });
 
+/* ===== サイト内検索 ===== */
 const searchOverlay = document.getElementById('searchOverlay');
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
@@ -757,20 +815,20 @@ searchOverlay.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') searchOverlay.classList.remove('open'); });
 
 const searchIndex = [
-  { title: 'プロフィール', url: '#profile', keywords: '名前 誕生日 年齢 推し 好き 苦手 ねぎとろ 虫 MBTI ISFP ファンネーム とろろ 目標 登録者' },
-  { title: 'よくある質問', url: '#faq', keywords: '質問 FAQ チャンネル名 由来 ジャンル 食べ物 趣味' },
-  { title: '動画', url: '#video', keywords: '動画 youtube チャンネル' },
-  { title: 'リンク', url: '#links', keywords: 'youtube マシュマロ リンク' },
-  { title: '利用規約', url: '#other', keywords: '利用規約 ルール' },
-  { title: 'プライバシーポリシー', url: '#other', keywords: 'プライバシー 個人情報' },
-  { title: 'クレジット', url: '#other', keywords: 'クレジット credit' },
-  { title: '更新履歴', url: '#other', keywords: '更新 履歴 history' },
-  { title: 'リンク集', url: '#other', keywords: 'リンク集' },
-  { title: 'グッズ紹介', url: '#other', keywords: 'グッズ goods' },
-  { title: 'コラボ情報', url: '#other', keywords: 'コラボ collab' },
-  { title: 'メディア出演情報', url: '#other', keywords: 'メディア 出演' },
-  { title: 'サイトマップ', url: '#sitemap', keywords: 'サイトマップ sitemap' },
-  { title: 'シェア', url: '#share', keywords: 'シェア share' },
+  { title: 'プロフィール', page: 'profile', keywords: '名前 誕生日 年齢 推し 好き 苦手 ねぎとろ 虫 MBTI ISFP ファンネーム とろろ 目標 登録者' },
+  { title: 'よくある質問', page: 'faq', keywords: '質問 FAQ チャンネル名 由来 ジャンル 食べ物 趣味' },
+  { title: '動画', page: 'video', keywords: '動画 youtube チャンネル' },
+  { title: 'リンク', page: 'links', keywords: 'youtube マシュマロ リンク' },
+  { title: '利用規約', page: 'other', keywords: '利用規約 ルール' },
+  { title: 'プライバシーポリシー', page: 'other', keywords: 'プライバシー 個人情報' },
+  { title: 'クレジット', page: 'other', keywords: 'クレジット credit' },
+  { title: '更新履歴', page: 'other', keywords: '更新 履歴 history' },
+  { title: 'リンク集', page: 'other', keywords: 'リンク集' },
+  { title: 'グッズ紹介', page: 'other', keywords: 'グッズ goods' },
+  { title: 'コラボ情報', page: 'other', keywords: 'コラボ collab' },
+  { title: 'メディア出演情報', page: 'other', keywords: 'メディア 出演' },
+  { title: 'サイトマップ', page: 'sitemap', keywords: 'サイトマップ sitemap' },
+  { title: 'シェア', page: 'share', keywords: 'シェア share' },
 ];
 function runSearch(q){
   if (!q.trim()) { searchResults.innerHTML = ''; return; }
@@ -782,16 +840,17 @@ function runSearch(q){
     searchResults.innerHTML = '<div style="padding:12px;color:var(--text-muted);font-size:.85rem">該当なし</div>';
   } else {
     searchResults.innerHTML = hits.map(h =>
-      `<a class="search-result" href="${h.url}">${h.title}</a>`
+      `<a class="search-result" data-link="${h.page}">${h.title}</a>`
     ).join('');
   }
 }
 searchInput.addEventListener('input', (e) => runSearch(e.target.value));
 searchResults.addEventListener('click', () => searchOverlay.classList.remove('open'));
 
+/* ===== シェア ===== */
 document.querySelectorAll('.share-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const url = location.href;
+    const url = location.origin + location.pathname;
     const title = 'とろろぉーーーー';
     const type = btn.dataset.share;
     if (type === 'x') window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank');
