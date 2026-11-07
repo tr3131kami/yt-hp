@@ -310,21 +310,6 @@ details[open] .faq-q .arrow{transform:rotate(180deg);color:var(--accent);animati
 }
 .qr-box .close-qr:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 10px 26px rgba(255,184,209,.6)}
 
-#settingsPanel{position:fixed;top:0;right:0;height:100vh;width:340px;max-width:90vw;background:var(--bg);box-shadow:-10px 0 40px rgba(140,135,160,.2);z-index:200;transform:translateX(100%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);padding:24px;overflow-y:auto}
-#settingsPanel.open{transform:translateX(0)}
-.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.panel-head h3{font-size:1rem;color:var(--text)}
-.panel-close{background:transparent;border:none;cursor:pointer;font-size:1.2rem;color:var(--text-muted);padding:4px}
-.panel-group{margin-bottom:24px}
-.panel-group h4{font-size:.8rem;font-weight:700;color:var(--text-muted);letter-spacing:.1em;margin-bottom:12px}
-.opt-row{display:flex;flex-wrap:wrap;gap:8px}
-.opt-btn{padding:8px 14px;background:#fff;border:1.5px solid transparent;border-radius:50px;font-size:.78rem;font-family:inherit;font-weight:500;color:var(--text);cursor:pointer;box-shadow:var(--shadow);transition:all .25s}
-.opt-btn:hover{transform:translateY(-2px)}
-.opt-btn.on{border-color:var(--accent);color:var(--accent);font-weight:700}
-.color-dots{display:flex;gap:10px;flex-wrap:wrap}
-.color-dot{width:36px;height:36px;border-radius:50%;border:3px solid #fff;cursor:pointer;box-shadow:var(--shadow);transition:transform .25s}
-.color-dot:hover{transform:scale(1.15)}
-.color-dot.on{box-shadow:0 0 0 2px var(--text)}
 
 #searchOverlay{position:fixed;inset:0;background:rgba(20,18,28,.6);backdrop-filter:blur(8px);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:100px 24px}
 #searchOverlay.open{display:flex;animation:fadeIn .3s}
@@ -385,6 +370,63 @@ footer{text-align:center;padding:48px 24px 60px;color:var(--text-muted);font-siz
 @keyframes sparkFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
 .firework-spark{position:fixed;pointer-events:none;width:6px;height:6px;border-radius:50%;z-index:9995;animation:fwFly 1s ease-out forwards}
 @keyframes fwFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+
+#authBar{position:relative;z-index:110;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:8px 48px 8px 16px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));color:var(--text);font-size:14px;box-shadow:var(--shadow)}
+#authBar .ab-msg{font-weight:500}
+#authBar .ab-btn{background:#fff;color:var(--text);border:none;border-radius:999px;padding:5px 18px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(120,110,150,.18);transition:transform .2s,box-shadow .2s;font-family:inherit}
+#authBar .ab-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(120,110,150,.25)}
+#authBar .ab-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.55);border:none;width:26px;height:26px;border-radius:50%;font-size:15px;line-height:1;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;padding:0}
+#authBar .ab-close:hover{background:#fff}
+#authBar .ab-avatar{width:26px;height:26px;border-radius:50%;background:#fff;object-fit:cover;border:2px solid #fff}
+#authBar .ab-user{font-weight:700;color:var(--text);text-decoration:none}
+#authBar .ab-user:hover{text-decoration:underline}
+#authBar[hidden]{display:none}
+
+.nav-auth{display:inline-flex;align-items:center;gap:8px}
+.na-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:999px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(255,184,209,.35);transition:transform .2s}
+.na-btn:hover{transform:translateY(-1px)}
+.na-logout{background:#fff;color:var(--text);border:1px solid rgba(200,190,220,.5);box-shadow:none;padding:6px 12px}
+.na-avatar{width:28px;height:28px;border-radius:50%;object-fit:cover}
+.na-user{font-weight:700;color:var(--text);text-decoration:none;font-size:14px}
+.na-user:hover{text-decoration:underline}
+.na-btn[hidden],.na-avatar[hidden],.na-user[hidden]{display:none}
+
+#loginModal{position:fixed;inset:0;background:rgba(20,18,28,.5);backdrop-filter:blur(8px);z-index:450;display:flex;align-items:center;justify-content:center;padding:20px}
+#loginModal[hidden]{display:none}
+.lm-box{position:relative;background:var(--bg);border-radius:20px;padding:28px 24px;width:340px;max-width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-hover);display:flex;flex-direction:column;gap:10px}
+.lm-box h3{font-size:1rem;text-align:center;margin-bottom:6px;color:var(--text)}
+.lm-close{position:absolute;top:10px;right:12px;background:transparent;border:none;font-size:20px;cursor:pointer;color:var(--text-muted);line-height:1;padding:4px}
+.lm-btn{background:#fff;border:1px solid rgba(200,190,220,.6);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;transition:transform .2s,box-shadow .2s;width:100%}
+.lm-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.lm-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none}
+.lm-sep{text-align:center;color:var(--text-muted);font-size:12px;margin:4px 0}
+#lmEmailForm{display:flex;flex-direction:column;gap:8px}
+#lmEmailForm input{padding:10px 14px;border-radius:12px;border:1px solid rgba(200,190,220,.7);font-size:14px;font-family:inherit;background:#fff;color:var(--text);width:100%}
+.lm-row{display:flex;gap:8px}
+.lm-err{color:#d64560;font-size:13px;text-align:center}
+.lm-err[hidden]{display:none}
+@media (max-width:640px){
+  #authBar{font-size:12px;padding:7px 40px 7px 10px;gap:8px}
+  #authBar .ab-btn{padding:4px 12px;font-size:12px}
+  #authBar .ab-avatar{width:22px;height:22px}
+  nav{padding:8px 12px;gap:6px}
+  .nav-logo{font-size:15px}
+  .nav-links{flex-wrap:nowrap;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{font-size:13px;white-space:nowrap;padding:2px 4px}
+  .na-btn{padding:6px 12px;font-size:12px}
+  .na-user{max-width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .na-avatar{width:24px;height:24px}
+  .lm-box{padding:24px 18px}
+}
+
+.members-locked { text-align:center; padding:24px 12px; border:2px dashed #f3b8d0; border-radius:16px; background:#fff7fa; }
+.member-card { display:flex; align-items:center; gap:14px; padding:16px; border-radius:16px; background:linear-gradient(120deg,#ffd7e8,#e4dcff,#d2f4e3); margin-bottom:14px; }
+.member-avatar { width:56px; height:56px; border-radius:50%; object-fit:cover; background:#fff; }
+.member-name { font-weight:700; font-size:18px; }
+.member-meta { font-size:13px; opacity:.75; }
+.member-box { border:1px solid #f0d7e4; border-radius:16px; padding:14px 16px; margin-bottom:14px; background:#fff; }
+.member-box h3 { margin:0 0 8px; font-size:15px; }
 </style>
 </head>
 <body>
@@ -394,6 +436,15 @@ footer{text-align:center;padding:48px 24px 60px;color:var(--text-muted);font-siz
 <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div><div class="blob blob-4"></div>
 <div id="fxLayer"></div>
 
+<div id="authBar" hidden>
+  <span class="ab-msg" id="abMsg">Scratchアカウントでログインできます</span>
+  <img class="ab-avatar" id="abAvatar" alt="" hidden>
+  <a class="ab-user" id="abUser" href="#" target="_blank" rel="noopener" hidden></a>
+  <button class="ab-btn" id="abLogin" type="button">ログイン</button>
+  <button class="ab-btn" id="abLogout" type="button" hidden>ログアウト</button>
+  <button class="ab-close" id="abClose" type="button" aria-label="バーを閉じる">×</button>
+</div>
+
 <nav>
   <a href="./" data-link="home" class="nav-logo"><span class="rainbow">とろろぉーーーー</span></a>
   <div class="nav-links">
@@ -402,15 +453,19 @@ footer{text-align:center;padding:48px 24px 60px;color:var(--text-muted);font-siz
     <a href="?q=video" data-link="video">動画</a>
     <a href="?q=links" data-link="links">リンク</a>
     <a href="?q=other" data-link="other">その他</a>
+    <a href="?q=members" data-link="members">限定</a>
     <a href="?q=sitemap" data-link="sitemap">サイトマップ</a>
   </div>
   <div class="nav-icons">
     <button class="icon-btn" id="searchBtn" aria-label="検索">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/></svg>
     </button>
-    <button class="icon-btn" id="settingsBtn" aria-label="設定">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    </button>
+    <span class="nav-auth" id="navAuth">
+      <img class="na-avatar" id="navAvatar" alt="" hidden>
+      <a class="na-user" id="navUser" href="#" target="_blank" rel="noopener" hidden></a>
+      <button class="na-btn" id="navLogin" type="button">ログイン</button>
+      <button class="na-btn na-logout" id="navLogout" type="button" hidden>ログアウト</button>
+    </span>
   </div>
 </nav>
 
@@ -569,6 +624,28 @@ footer{text-align:center;padding:48px 24px 60px;color:var(--text-muted);font-siz
   </div>
 </section>
 
+
+<section id="members" data-page="members" class="fade-in">
+  <h2 class="section-title">限定エリア</h2>
+  <div id="membersLocked" class="members-locked">
+    <p>ここはログインした人だけが見られるエリアだよ。</p>
+    <button class="na-btn" id="membersLoginBtn" type="button">ログイン</button>
+  </div>
+  <div id="membersInner" hidden>
+    <div class="member-card">
+      <img id="memberAvatar" class="member-avatar" alt="" hidden>
+      <div class="member-info">
+        <div class="member-name" id="memberName"></div>
+        <div class="member-meta"><span id="memberMethod"></span>でログイン中 ・ <span id="memberNo"></span></div>
+      </div>
+    </div>
+    <div class="member-box">
+      <h3>限定お知らせ</h3>
+      <p>限定エリアがオープンしました。これからここに、ログインした人だけが見られるお知らせやリンクを置いていくよ。</p>
+    </div>
+  </div>
+</section>
+
 <section id="sitemap" data-page="sitemap" class="fade-in">
   <h2 class="section-title">サイトマップ</h2>
   <div class="sitemap-grid">
@@ -622,42 +699,6 @@ footer{text-align:center;padding:48px 24px 60px;color:var(--text-muted);font-siz
   <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
-<aside id="settingsPanel">
-  <div class="panel-head">
-    <h3>設定</h3>
-    <button class="panel-close" id="panelClose">✕</button>
-  </div>
-  <div class="panel-group">
-    <h4>配色テーマ</h4>
-    <div class="color-dots" id="colorDots">
-      <div class="color-dot on" data-accent="#ffb8d1" data-accent2="#c4b5fd" data-accent3="#a5e8e0" style="background:linear-gradient(135deg,#ffb8d1,#c4b5fd)"></div>
-      <div class="color-dot" data-accent="#a5d8ff" data-accent2="#c4b5fd" data-accent3="#a5e8e0" style="background:linear-gradient(135deg,#a5d8ff,#c4b5fd)"></div>
-      <div class="color-dot" data-accent="#b5e8c8" data-accent2="#a5e8e0" data-accent3="#c4e8b5" style="background:linear-gradient(135deg,#b5e8c8,#a5e8e0)"></div>
-      <div class="color-dot" data-accent="#ffd4a5" data-accent2="#ffb8d1" data-accent3="#ffe8a5" style="background:linear-gradient(135deg,#ffd4a5,#ffb8d1)"></div>
-      <div class="color-dot" data-accent="#c4b5fd" data-accent2="#a5d8ff" data-accent3="#ffb8d1" style="background:linear-gradient(135deg,#c4b5fd,#a5d8ff)"></div>
-    </div>
-  </div>
-  <div class="panel-group">
-    <h4>背景エフェクト</h4>
-    <div class="opt-row" id="fxBtns">
-      <button class="opt-btn on" data-fx="none">なし</button>
-      <button class="opt-btn" data-fx="sakura">桜</button>
-      <button class="opt-btn" data-fx="snow">雪</button>
-      <button class="opt-btn" data-fx="star">星</button>
-      <button class="opt-btn" data-fx="bubble">バブル</button>
-      <button class="opt-btn" data-fx="confetti">紙吹雪</button>
-    </div>
-  </div>
-  <div class="panel-group">
-    <h4>インタラクション</h4>
-    <div class="opt-row">
-      <button class="opt-btn" id="cursorBtn">カスタムカーソル</button>
-      <button class="opt-btn" id="followerBtn">マウス追従</button>
-      <button class="opt-btn" id="clickFxBtn">クリックでパーティクル</button>
-      <button class="opt-btn" id="fireworkBtn">花火</button>
-    </div>
-  </div>
-</aside>
 
 <div id="searchOverlay">
   <div class="search-box">
@@ -703,11 +744,6 @@ footer{text-align:center;padding:48px 24px 60px;color:var(--text-muted);font-siz
     <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
     URLをコピー
   </div>
-  <div class="ctx-sep"></div>
-  <div class="ctx-item" data-ctx="settings">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    設定を開く
-  </div>
 </div>
 
 <script>
@@ -741,7 +777,7 @@ function playFaqAnim(){
 }
 
 (function(){
-  const PAGES = ['home', 'profile', 'faq', 'video', 'links', 'other', 'sitemap', 'share'];
+  const PAGES = ['home', 'profile', 'faq', 'video', 'links', 'other', 'members', 'sitemap', 'share'];
   let isNavigating = false;
 
   function getPageFromURL(){
@@ -941,64 +977,6 @@ function launchFirework(){
     setTimeout(() => s.remove(), 1100);
   }
 }
-function toggleFirework(on){
-  if (fwTimer) clearInterval(fwTimer);
-  if (on) { launchFirework(); fwTimer = setInterval(launchFirework, 1800); }
-}
-
-const panel = document.getElementById('settingsPanel');
-document.getElementById('settingsBtn').addEventListener('click', () => panel.classList.add('open'));
-document.getElementById('panelClose').addEventListener('click', () => panel.classList.remove('open'));
-
-document.querySelectorAll('.color-dot').forEach(dot => {
-  dot.addEventListener('click', () => {
-    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('on'));
-    dot.classList.add('on');
-    document.documentElement.style.setProperty('--accent', dot.dataset.accent);
-    document.documentElement.style.setProperty('--accent2', dot.dataset.accent2);
-    document.documentElement.style.setProperty('--accent3', dot.dataset.accent3);
-  });
-});
-
-document.querySelectorAll('#fxBtns .opt-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#fxBtns .opt-btn').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
-    setFx(btn.dataset.fx);
-  });
-});
-
-function toggleBtn(id, on){
-  const b = document.getElementById(id);
-  if (on) b.classList.add('on'); else b.classList.remove('on');
-}
-
-let cursorOn = false;
-document.getElementById('cursorBtn').addEventListener('click', () => {
-  cursorOn = !cursorOn;
-  document.body.classList.toggle('custom-cursor', cursorOn);
-  toggleBtn('cursorBtn', cursorOn);
-});
-
-let followerOn = false;
-document.getElementById('followerBtn').addEventListener('click', () => {
-  followerOn = !followerOn;
-  document.body.classList.toggle('follow-on', followerOn);
-  toggleBtn('followerBtn', followerOn);
-});
-
-document.getElementById('clickFxBtn').addEventListener('click', () => {
-  clickFxOn = !clickFxOn;
-  toggleBtn('clickFxBtn', clickFxOn);
-});
-
-let fwOn = false;
-document.getElementById('fireworkBtn').addEventListener('click', () => {
-  fwOn = !fwOn;
-  toggleFirework(fwOn);
-  toggleBtn('fireworkBtn', fwOn);
-});
-
 const searchOverlay = document.getElementById('searchOverlay');
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
@@ -1188,11 +1166,311 @@ ctxMenu.addEventListener('click', (e) => {
   else if (act === 'search') { searchOverlay.classList.add('open'); setTimeout(() => searchInput.focus(), 100); }
   else if (act === 'share') window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent('とろろぉーーーー')}`, '_blank');
   else if (act === 'copy') navigator.clipboard.writeText(url);
-  else if (act === 'settings') panel.classList.add('open');
   closeCtx();
 });
 
 setFx('none');
+</script>
+
+
+<div id="loginModal" hidden>
+  <div class="lm-box">
+    <button class="lm-close" id="lmClose" type="button" aria-label="閉じる">×</button>
+    <h3>ログイン方法を選んでね</h3>
+    <button class="lm-btn" id="lmScratch" type="button">Scratchでログイン</button>
+    <button class="lm-btn" id="lmGoogle" type="button">Googleでログイン</button>
+    <button class="lm-btn" id="lmGithub" type="button">GitHubでログイン</button>
+    <div class="lm-sep">または</div>
+    <form id="lmEmailForm">
+      <input type="email" id="lmEmail" placeholder="メールアドレス" autocomplete="email" required>
+      <input type="password" id="lmPassword" placeholder="パスワード" autocomplete="current-password" required>
+      <div class="lm-row">
+        <button type="submit" class="lm-btn lm-primary">ログイン</button>
+        <button type="button" class="lm-btn" id="lmEmailSignup">新規登録</button>
+      </div>
+    </form>
+    <p class="lm-err" id="lmError" hidden></p>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import { getAuth, onAuthStateChanged, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, GithubAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, getAdditionalUserInfo } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getFirestore, doc, getDoc, runTransaction } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyBfKW5cuKxXBFHWV1MRumSey8PPwgcCfvQ',
+  authDomain: 'tororo-hp.firebaseapp.com',
+  projectId: 'tororo-hp',
+  storageBucket: 'tororo-hp.firebasestorage.app',
+  messagingSenderId: '133948474364',
+  appId: '1:133948474364:web:decac4c97ddd8f167ba879'
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const bar = document.getElementById('authBar');
+const msg = document.getElementById('abMsg');
+const avatar = document.getElementById('abAvatar');
+const userLink = document.getElementById('abUser');
+const loginBtn = document.getElementById('abLogin');
+const logoutBtn = document.getElementById('abLogout');
+const closeBtn = document.getElementById('abClose');
+const navAvatar = document.getElementById('navAvatar');
+const navUser = document.getElementById('navUser');
+const navLogin = document.getElementById('navLogin');
+const navLogout = document.getElementById('navLogout');
+const modal = document.getElementById('loginModal');
+const lmError = document.getElementById('lmError');
+
+const APP_NAME = 'とろろぉーーーー';
+const USER_KEY = 'sa_username';
+const CLOSE_KEY = 'sa_bar_closed';
+
+let scratchUser = null;
+try { scratchUser = localStorage.getItem(USER_KEY); } catch (e) {}
+let fbUser = null;
+
+function pageUrl() { return location.origin + location.pathname; }
+function applyVisibility() {
+  let closed = false;
+  try { closed = sessionStorage.getItem(CLOSE_KEY) === '1'; } catch (e) {}
+  if (bar) bar.hidden = closed;
+}
+function identity() {
+  if (fbUser) {
+    let hint = null;
+    try { const h = JSON.parse(localStorage.getItem(NAME_HINT_KEY) || 'null'); if (h && h.uid === fbUser.uid) hint = h.name; } catch (e) {}
+    return { name: fbUser.displayName || hint || fbUser.email || 'ユーザー', avatar: fbUser.photoURL || null, link: null };
+  }
+  if (scratchUser) return { name: scratchUser, avatar: null, link: 'https://scratch.mit.edu/users/' + encodeURIComponent(scratchUser) + '/' };
+  return null;
+}
+function scratchAvatar(imgEl, username) {
+  fetch('https://api.scratch.mit.edu/users/' + encodeURIComponent(username) + '/')
+    .then(r => r.json())
+    .then(d => {
+      const img = d && d.profile && d.profile.images && (d.profile.images['90x90'] || d.profile.images['60x60']);
+      if (img && identity() && identity().name === username) { imgEl.src = img; imgEl.hidden = false; }
+    }).catch(() => {});
+}
+function render() {
+  const id = identity();
+  if (id) {
+    msg.textContent = 'ログイン中：';
+    userLink.textContent = id.name;
+    if (id.link) { userLink.href = id.link; } else { userLink.removeAttribute('href'); }
+    userLink.hidden = false;
+    loginBtn.hidden = true;
+    logoutBtn.hidden = false;
+    navUser.textContent = id.name;
+    if (id.link) { navUser.href = id.link; } else { navUser.removeAttribute('href'); }
+    navUser.hidden = false;
+    navLogin.hidden = true;
+    navLogout.hidden = false;
+    if (id.avatar) {
+      avatar.src = id.avatar; avatar.hidden = false;
+      navAvatar.src = id.avatar; navAvatar.hidden = false;
+    } else {
+      avatar.hidden = true; navAvatar.hidden = true;
+      if (scratchUser && !fbUser) { scratchAvatar(avatar, id.name); scratchAvatar(navAvatar, id.name); }
+    }
+  } else {
+    msg.textContent = 'Scratchアカウントなどでログインできます';
+    userLink.hidden = true;
+    avatar.hidden = true;
+    loginBtn.hidden = false;
+    logoutBtn.hidden = true;
+    navUser.hidden = true;
+    navAvatar.hidden = true;
+    navLogin.hidden = false;
+    navLogout.hidden = true;
+  }
+  applyVisibility();
+  renderMembers();
+}
+function openModal() { lmError.hidden = true; modal.hidden = false; }
+function closeModal() { modal.hidden = true; }
+function showError(text) { lmError.textContent = text; lmError.hidden = false; }
+function friendlyError(e) {
+  const code = e && e.code ? e.code : '';
+  const map = {
+    'auth/invalid-credential': 'メールアドレスかパスワードが違います',
+    'auth/user-not-found': 'そのメールアドレスは登録されていません',
+    'auth/wrong-password': 'パスワードが違います',
+    'auth/email-already-in-use': 'そのメールアドレスは登録済みだよ。「ログイン」を押してね',
+    'auth/weak-password': 'パスワードは6文字以上にしてね',
+    'auth/invalid-email': 'メールアドレスの形が違います',
+    'auth/popup-closed-by-user': 'ログイン画面が閉じられたよ',
+    'auth/account-exists-with-different-credential': 'そのアカウントは別のログイン方法で登録済みだよ',
+    'auth/unauthorized-domain': 'このドメインはまだ許可されていません'
+  };
+  return (map[code] || 'ログインできませんでした') + (code ? '' : '');
+}
+function doScratchLogin() {
+  closeModal();
+  const b64 = btoa(pageUrl());
+  location.href = 'https://auth.itinerary.eu.org/auth/?redirect=' + encodeURIComponent(b64) + '&name=' + encodeURIComponent(APP_NAME);
+}
+const NAME_HINT_KEY = 'tororo_fb_name_hint';
+function rememberName(result) {
+  try {
+    const info = result ? getAdditionalUserInfo(result) : null;
+    if (info && info.username && result.user) {
+      localStorage.setItem(NAME_HINT_KEY, JSON.stringify({ uid: result.user.uid, name: info.username }));
+    }
+  } catch (e) {}
+}
+function socialLogin(kind) {
+  const provider = kind === 'google' ? new GoogleAuthProvider() : new GithubAuthProvider();
+  signInWithPopup(auth, provider)
+    .then(result => { rememberName(result); render(); closeModal(); })
+    .catch(e => {
+      if (e.code === 'auth/popup-blocked' || e.code === 'auth/operation-not-supported-in-this-environment') {
+        signInWithRedirect(auth, provider);
+      } else if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') {
+        showError(friendlyError(e));
+      }
+    });
+}
+async function doLogout() {
+  if (fbUser) { try { await signOut(auth); } catch (e) {} }
+  fbMemberNo = null;
+  scratchUser = null;
+  try { localStorage.removeItem(USER_KEY); localStorage.removeItem(NAME_HINT_KEY); } catch (e) {}
+  render();
+}
+
+loginBtn.addEventListener('click', openModal);
+navLogin.addEventListener('click', openModal);
+
+const membersLocked = document.getElementById('membersLocked');
+const membersInner = document.getElementById('membersInner');
+const memberAvatar = document.getElementById('memberAvatar');
+const memberName = document.getElementById('memberName');
+const memberMethod = document.getElementById('memberMethod');
+const memberNoEl = document.getElementById('memberNo');
+function methodLabel() {
+  if (fbUser) {
+    const p = (fbUser.providerData && fbUser.providerData[0] && fbUser.providerData[0].providerId) || '';
+    return ({ 'google.com': 'Google', 'github.com': 'GitHub', 'password': 'メールアドレス' })[p] || 'ログイン';
+  }
+  if (scratchUser) return 'Scratch';
+  return '';
+}
+let fbMemberNo = null;
+let fbMemberBusy = false;
+async function ensureMemberNo() {
+  if (!fbUser || fbMemberNo !== null || fbMemberBusy) return;
+  fbMemberBusy = true;
+  try {
+    const userRef = doc(db, 'users', fbUser.uid);
+    const snap = await getDoc(userRef);
+    if (snap.exists()) {
+      fbMemberNo = snap.data().no;
+    } else {
+      fbMemberNo = await runTransaction(db, async (tx) => {
+        const counterRef = doc(db, 'meta', 'counter');
+        const c = await tx.get(counterRef);
+        const next = (c.exists() ? c.data().count : 0) + 1;
+        tx.set(counterRef, { count: next });
+        tx.set(userRef, { no: next });
+        return next;
+      });
+    }
+  } catch (e) { /* 番号が取れなかったら次回また試す */ }
+  fbMemberBusy = false;
+  renderMembers();
+}
+function memberNoText() {
+  if (fbUser) return fbMemberNo !== null ? '会員No.' + String(fbMemberNo).padStart(4, '0') : '会員No.発行中…';
+  return '会員No. —';
+}
+function renderMembers() {
+  if (!membersLocked) return;
+  const id = identity();
+  if (!id) { membersLocked.hidden = false; membersInner.hidden = true; return; }
+  membersLocked.hidden = true;
+  membersInner.hidden = false;
+  memberName.textContent = id.name;
+  memberMethod.textContent = methodLabel();
+  memberNoEl.textContent = memberNoText();
+  if (id.avatar) { memberAvatar.src = id.avatar; memberAvatar.hidden = false; }
+  else {
+    memberAvatar.hidden = true;
+    if (scratchUser && !fbUser) scratchAvatar(memberAvatar, id.name);
+  }
+}
+document.getElementById('membersLoginBtn').addEventListener('click', openModal);
+logoutBtn.addEventListener('click', doLogout);
+navLogout.addEventListener('click', doLogout);
+closeBtn.addEventListener('click', () => {
+  try { sessionStorage.setItem(CLOSE_KEY, '1'); } catch (e) {}
+  bar.hidden = true;
+});
+document.getElementById('lmClose').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.getElementById('lmScratch').addEventListener('click', doScratchLogin);
+document.getElementById('lmGoogle').addEventListener('click', () => socialLogin('google'));
+document.getElementById('lmGithub').addEventListener('click', () => socialLogin('github'));
+document.getElementById('lmEmailForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('lmEmail').value.trim();
+  const pass = document.getElementById('lmPassword').value;
+  signInWithEmailAndPassword(auth, email, pass)
+    .then(() => closeModal())
+    .catch(err => showError(friendlyError(err)));
+});
+document.getElementById('lmEmailSignup').addEventListener('click', () => {
+  const email = document.getElementById('lmEmail').value.trim();
+  const pass = document.getElementById('lmPassword').value;
+  if (!email || !pass) { showError('メールアドレスとパスワードを入れてね'); return; }
+  createUserWithEmailAndPassword(auth, email, pass)
+    .then(() => closeModal())
+    .catch(err => showError(friendlyError(err)));
+});
+
+getRedirectResult(auth).then(result => { if (result) { rememberName(result); render(); } }).catch(e => {
+  if (e && e.code && e.code !== 'auth/no-auth-event') {
+    msg.textContent = friendlyError(e);
+  }
+});
+onAuthStateChanged(auth, user => { fbUser = user; if (!user) fbMemberNo = null; render(); if (user) ensureMemberNo(); });
+
+const params = new URLSearchParams(location.search);
+const code = params.get('privateCode');
+if (code) {
+  msg.textContent = 'ログインを確認しています…';
+  loginBtn.hidden = true;
+  navLogin.hidden = true;
+  applyVisibility();
+  fetch('https://auth-api.itinerary.eu.org/auth/verifyToken/' + encodeURIComponent(code))
+    .then(r => r.json())
+    .then(data => {
+      const expected = pageUrl().replace(/\/$/, '');
+      const got = (data && data.redirect ? String(data.redirect) : '').replace(/\/$/, '');
+      if (data && data.valid === true && data.username && got === expected) {
+        scratchUser = data.username;
+        try { localStorage.setItem(USER_KEY, scratchUser); } catch (e) {}
+      } else if (!identity()) {
+        msg.textContent = 'ログインできませんでした。もう一度お試しください';
+      }
+      render();
+      if (!identity()) msg.textContent = 'ログインできませんでした。もう一度お試しください';
+    })
+    .catch(() => {
+      render();
+      if (!identity()) msg.textContent = 'ログインの確認ができませんでした';
+    })
+    .finally(() => {
+      params.delete('privateCode');
+      const qs = params.toString();
+      history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+    });
+} else {
+  render();
+}
 </script>
 
 </body>
